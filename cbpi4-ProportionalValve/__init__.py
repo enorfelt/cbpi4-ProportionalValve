@@ -14,6 +14,8 @@ logger = logging.getLogger(__name__)
     Property.Select(label="SamplingTime", options=[1,2,3,4,5],description="Time in seconds for power base interval (Default:3)"),
     Property.Sensor("VolumeSensor",description="Select Volume Sensor that you want to use to be able to auto hold volume"),
     Property.Actor(label="PumpActor", description="If selected starts the pump actor when auto hold is enabled"),
+    Property.Number(label="maxOutput",configurable = True, default_value = 100, description="Maximum output %"),
+    Property.Number(label="minOutput",configurable = True, default_value = 0, description="Minimum output %"),
     Property.Number(label="P",configurable = True, default_value = 0, description="P Value of PID"),
     Property.Number(label="I",configurable = True, default_value = 0, description="I Value of PID"),
     Property.Number(label="D",configurable = True, default_value = 0, description="D Value of PID"),
@@ -80,8 +82,10 @@ class ProportionalValveActor(CBPiActor):
             i = float(self.props.get("I", 0.4))
             d = float(self.props.get("D", 0))
             openPercentOld = self.open
+            maxOutput = float(self.props.get("maxOutput", 100))
+            minOutput = float(self.props.get("minOutput", 0))
 
-            pid = PIDArduino(samplingTime, p, i, d, 0, 100)
+            pid = PIDArduino(samplingTime, p, i, d, minOutput, maxOutput)
 
 
             while self.running == True:
