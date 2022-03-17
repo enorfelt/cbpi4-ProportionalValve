@@ -163,7 +163,7 @@ class PIDArduino(object):
             return self._lastOutput
 
         # Compute all the working error variables
-        error = setpoint - inputValue
+        error = inputValue - setpoint
         dInput = inputValue - self._lastInput
 
         # In order to prevent windup, only integrate if the process is not saturated
