@@ -7,7 +7,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 
 setup(name='cbpi4-ProportionalValve',
-  version='0.0.1',
+  version='0.0.2',
   description='CraftBeerPi4 Plugin to control a motorized proportional valve using the MCP4725 board.',
   author='Erik Norfelt',
   author_email='enorfelt@outlook.com',
@@ -19,7 +19,7 @@ setup(name='cbpi4-ProportionalValve',
   'cbpi4-ProportionalValve': ['*','*.txt', '*.rst', '*.yaml']},
   packages=['cbpi4-ProportionalValve'],
   install_requires=[
-    'cbpi>=4.0.0.33',
+    'cbpi4>=4.1.6',,
     'Adafruit-Blinka',
     'adafruit-circuitpython-mcp4725',
   ],
